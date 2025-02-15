@@ -1,2 +1,2 @@
 
-![Adobe-Express-file.png](https://i.postimg.cc/cCNqRL93/Adobe-Express-file.png)
+<img src="KernelPanic/Diagrama_Uno.png" alt="Imagen">
