@@ -1,88 +1,83 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import = "java.sql.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Database SQL Load</title>
-    </head>
-    <style>
-        .error {
-            color: red;
-        }
-        pre {
-            color: green;
-        }
-    </style>
-    <body>
-        <h2>Database SQL Load</h2>
-        <%
-            String dbname = "sob_grup_51";
-            String schema = "ROOT";
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/" + dbname, "root", "root");
-            Statement stmt = con.createStatement();
-           
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Database SQL Load</title>
+</head>
+<style>
+    .error {
+        color: red;
+    }
+    pre {
+        color: green;
+    }
+</style>
+<body>
+    <h2>Database SQL Load</h2>
+    <%
+        String dbname = "sob_grup_51";
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/" + dbname, "root", "root");
+        Statement stmt = con.createStatement();
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = "'" + formatter.format(new java.util.Date()) + "'"; // Comillas para SQL
 
-            // Inserción de datos
-            String data[] = new String[]{
-                // Insertar Usuarios (CUSTOMER)
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'admin', 'adminpass', 'ADMIN')",
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'user1', 'user1pass', 'CUSTOMER')",
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'user2', 'user2pass', 'CUSTOMER')",
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'user3', 'user3pass', 'CUSTOMER')",
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'user4', 'user4pass', 'CUSTOMER')",
-                "INSERT INTO " + schema + ".CUSTOMER (id, username, password, role) VALUES (NEXT VALUE FOR CUSTOMER_GEN, 'sob', 'sob', 'CUSTOMER')",
 
-                // Insertar Credenciales (CREDENTIALS) vinculadas a CUSTOMER
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'admin', 'adminpass', 1)",
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'user1', 'user1pass', 2)",
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'user2', 'user2pass', 3)",
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'user3', 'user3pass', 4)",
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'user4', 'user4pass', 5)",
-                "INSERT INTO " + schema + ".CREDENTIALS (id, username, password, customer_id) VALUES (NEXT VALUE FOR CREDENTIALS_GEN, 'sob', 'sob', 6)",
+        String[] data = {
+            
+            
+            // Estados
+            "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'Abierto')",
+            "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'En proceso')",
+            "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'Cerrado')",
 
-                // Insertar Temas (TOPIC)
-                "INSERT INTO " + schema + ".TOPIC (id, name) VALUES (NEXT VALUE FOR TOPIC_GEN, 'Technology')",
-                "INSERT INTO " + schema + ".TOPIC (id, name) VALUES (NEXT VALUE FOR TOPIC_GEN, 'Science')",
-                "INSERT INTO " + schema + ".TOPIC (id, name) VALUES (NEXT VALUE FOR TOPIC_GEN, 'Health')",
-                "INSERT INTO " + schema + ".TOPIC (id, name) VALUES (NEXT VALUE FOR TOPIC_GEN, 'Education')",
-                "INSERT INTO " + schema + ".TOPIC (id, name) VALUES (NEXT VALUE FOR TOPIC_GEN, 'Business')",
+            // Municipios
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad A')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad B')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad C')",
 
-                // Insertar Artículos (ARTICLE)
-                "INSERT INTO " + schema + ".ARTICLE (id, title, content, summary, imageUrl, publicationDate, viewCount, isPrivate, author_id) VALUES (NEXT VALUE FOR ARTICLE_GEN, 'Introduction to Java', 'Java is a versatile programming language...', 'A brief introduction to Java.', 'http://example.com/java.jpg', CURRENT_DATE, 0, 0, 1)",
-                "INSERT INTO " + schema + ".ARTICLE (id, title, content, summary, imageUrl, publicationDate, viewCount, isPrivate, author_id) VALUES (NEXT VALUE FOR ARTICLE_GEN, 'Advanced SQL Techniques', 'SQL is essential for database management...', 'Exploring advanced SQL topics.', 'http://example.com/sql.jpg', CURRENT_DATE, 0, 1, 1)",
-                "INSERT INTO " + schema + ".ARTICLE (id, title, content, summary, imageUrl, publicationDate, viewCount, isPrivate, author_id) VALUES (NEXT VALUE FOR ARTICLE_GEN, 'Health and Wellness', 'Maintaining good health is crucial...', 'Tips for a healthy lifestyle.', 'http://example.com/health.jpg', CURRENT_DATE, 0, 0, 2)",
-                "INSERT INTO " + schema + ".ARTICLE (id, title, content, summary, imageUrl, publicationDate, viewCount, isPrivate, author_id) VALUES (NEXT VALUE FOR ARTICLE_GEN, 'Educational Reforms', 'Discussing the latest trends in education...', 'An overview of educational reforms.', 'http://example.com/education.jpg', CURRENT_DATE, 0, 0, 4)",
-                "INSERT INTO " + schema + ".ARTICLE (id, title, content, summary, imageUrl, publicationDate, viewCount, isPrivate, author_id) VALUES (NEXT VALUE FOR ARTICLE_GEN, 'Business Strategies', 'Understanding modern business strategies...', 'Insights into business world.', 'http://example.com/business.jpg', CURRENT_DATE, 0, 1, 5)",
+            // Tipos de Incidencia
+            "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Infraestructura')",
+            "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Vial')",
+            "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Limpieza')",
 
-                // Insertar Relaciones entre Artículos y Temas (ARTICLE_TOPIC)
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (1, 1)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (2, 2)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (1, 2)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (3, 3)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (3, 1)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (4, 4)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (3, 5)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC (TOPIC_ID, ARTICLE_ID) VALUES (5, 5)"
-            };
+            //Credenciales
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user1pass', 'user1')",
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user2pass', 'user2')",
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user3pass', 'user3')",
+ 
+            // Usuarios
+            "INSERT INTO Usuario (id, cityHall, ImageURL) VALUES (NEXT VALUE FOR Usuario_Gen, 1, 'http://example.com/image1.jpg')",
+            "INSERT INTO Usuario (id, cityHall, ImageURL) VALUES (NEXT VALUE FOR Usuario_Gen, 0, 'http://example.com/image2.jpg')",
+        
+            // Incidencias
+            "INSERT INTO Incidencia (id, dateInitial, dateFinished, description, emoji, likes, score_IA, score_final, x, y, street, municipio_id, estado_id, tiposincidencia_id) " +
+            "VALUES (NEXT VALUE FOR Incidencia_Gen, " + date + ", NULL, 'Bache en la calle principal', '⚠️', 10, 8, 8, 100, 200, 'Calle Falsa 123', 1, 1, 2)",
 
-            for (String datum : data) {
-                try {
-                    stmt.executeUpdate(datum);
-                    out.println("<pre> -> " + datum + "</pre>");
-                } catch (SQLException e) {
-                    if (e.getSQLState().equals("23505")) { // Clave duplicada
-                        out.println("<span class='error'>Clave duplicada, omitiendo: " + datum + "</span><br>");
-                    } else {
-                        out.println("<span class='error'>SQLException al insertar datos: " + datum + "</span><br>");
-                        out.println("<span class='error'>" + e.getMessage() + "</span><br>");
-                        return;
-                    }
-                }
+            // Sugerencias (corregido el nombre de la columna si es necesario)
+            "INSERT INTO Sugerencia (id, dateInitial, dateFinished, description, emoji, likes, processed, score_IA, score_final, street, type, x, y, municipio_id) " +
+            "VALUES (NEXT VALUE FOR Sugerencia_Gen, " + date + ", NULL, 'Instalar más árboles en el parque', '🌳', 15, 0, 9, 9, 'Plaza Central', 'Mejora Ambiental', 120, 220, 1)"
+        };
+
+        for (String query : data) {
+            try {
+                stmt.executeUpdate(query);
+                out.println("<pre> -> " + query + "</pre>");
+            } catch (SQLException e) {
+                out.println("<span class='error'>Error en: " + query + " -> " + e.getMessage() + "</span><br>");
             }
-        %>
-        <button onclick="window.location='<%=request.getSession().getServletContext().getContextPath()%>'">Go home</button>
-    </body>
+        }
+
+        stmt.close();
+        con.close();
+    %>
+
+    <button onclick="window.location='<%=request.getSession().getServletContext().getContextPath()%>'">Go home</button>
+</body>
 </html>

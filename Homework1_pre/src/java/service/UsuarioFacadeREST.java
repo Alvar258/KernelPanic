@@ -23,105 +23,58 @@ import jakarta.ws.rs.core.SecurityContext;
 import jakarta.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.sql.DatabaseMetaData;
-import model.entities.Article;
 import java.util.List;
-import model.entities.Customer;
-import model.entities.CustomerDTO;
+import model.entities.Usuario;
 import authn.JWTUtil;
 import jakarta.persistence.NoResultException;
 
 @Stateless
-@Path("/customer")
+@Path("/usuario")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-public class CustomerFacadeREST {
+public class UsuarioFacadeREST {
 
     @PersistenceContext(unitName = "Homework1PU")
     private EntityManager em;
 
-    // GET /rest/api/v1/customer
+    // GET /rest/api/v1/usuario
     @GET
     public Response getAllUsers(@Context UriInfo uriInfo) {
         // Consulta para obtener todos los usuarios sin filtros
-        TypedQuery<Customer> query = em.createQuery("SELECT u FROM Customer u", Customer.class);
-        List<Customer> users = query.getResultList();
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+        List<Usuario> users = query.getResultList();
 
-        // Convertir cada entidad Customer en un CustomerDTO y agregar link al último artículo, si existe
-        List<CustomerDTO> userDTOs = users.stream().map(user -> {
-            CustomerDTO dto = new CustomerDTO(user.getId(), user.getUsername(), user.getRole());
-
-            if (user.getArticles() != null && !user.getArticles().isEmpty()) {
-                Article latestArticle = user.getArticles().stream()
-                        .max((a1, a2) -> a1.getPublicationDate().compareTo(a2.getPublicationDate()))
-                        .orElse(null);
-
-                if (latestArticle != null) {
-                    String articleLink = uriInfo.getBaseUriBuilder()
-                            .path(ArticleFacadeREST.class)
-                            .path(Long.toString(latestArticle.getId()))
-                            .build()
-                            .toString();
-                    dto.addLink("latest_article", articleLink);
-                }
-            }
-
-            return dto;
-        }).toList();
-
-        return Response.ok(userDTOs).build();
+        return Response.ok(users).build();
     }
 
-
-    // GET /rest/api/v1/customer/{id}
-    @GET
-    @Path("{id}")
-    public Response getUser(@PathParam("id") Long id) {
-        Customer user = em.find(Customer.class, id);
-        if (user == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Usuario no encontrado.").build();
-        }
-
-        // Crear DTO para evitar exponer contraseñas
-        CustomerDTO dto = new CustomerDTO(user.getId(), user.getUsername(), user.getRole());
-        if (user.getArticles() != null && !user.getArticles().isEmpty()) {
-            Article latestArticle = user.getArticles().stream()
-                                        .max((a1, a2) -> a1.getPublicationDate().compareTo(a2.getPublicationDate()))
-                                        .orElse(null);
-            if (latestArticle != null) {
-                dto.addLink("article", "/rest/api/v1/article/" + latestArticle.getId());
-            }
-        }
-
-        return Response.ok(dto).build();
-    }
-
-    // PUT /rest/api/v1/customer/{id} - Opcional: Actualizar un usuario
+    // PUT /rest/api/v1/customer/{id} -  Actualizar un usuario
     @PUT
     @Path("{id}")
     @Secured
-    public Response updateUser(@PathParam("id") Long id, Customer updatedUser, @Context SecurityContext securityContext) {
-        Customer user = em.find(Customer.class, id);
+    public Response updateUser(@PathParam("id") Long id, Usuario updatedUser, @Context SecurityContext securityContext) {
+        Usuario user = em.find(Usuario.class, id);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Usuario no encontrado.").build();
         }
 
-        String username = securityContext.getUserPrincipal().getName();
-        boolean isAdmin = securityContext.isUserInRole("ADMIN");
+        /*String username = securityContext.getUserPrincipal().getName();
 
         // Verificar si el usuario autenticado es el mismo o si es un administrador
-        if (!username.equals(user.getUsername()) && !isAdmin) {
+        if (!username.getCityHall()) {
             return Response.status(Response.Status.FORBIDDEN).entity("No tienes permiso para actualizar este usuario.").build();
-        }
+        }*/
 
         // Actualizar los campos permitidos
-        user.setUsername(updatedUser.getUsername());
-        user.setPassword(updatedUser.getPassword());
-        if (isAdmin) {
-            user.setRole(updatedUser.getRole()); // Solo los administradores pueden cambiar roles
+        user.setCredentials(updatedUser.getCredentials()); 
+     
+        if (user.getCityHall()) {
+            user.setCityHall(updatedUser.getCityHall()); // Solo los administradores pueden cambiar roles
         } else {
             // Asegurarse de que los usuarios no cambien su propio rol
-            updatedUser.setRole(user.getRole());
+            updatedUser.setCityHall(user.getCityHall());
         }
+        
+        user.setImageURL(updatedUser.getImageURL());
 
         try {
             em.merge(user);
@@ -133,25 +86,25 @@ public class CustomerFacadeREST {
 
     // POST /rest/api/v1/customer - Crear un nuevo usuario
     @POST
-    public Response createUser(Customer user, @Context UriInfo uriInfo) {
+    public Response createUser(Usuario user, @Context UriInfo uriInfo) {
         // Validar campos obligatorios
-        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+        if (user.getCredentials().getUsername() == null || user.getCredentials().getUsername().trim().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).entity("El nombre de usuario no puede estar vacío.").build();
         }
 
-        if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+        if (user.getCredentials().getPassword() == null || user.getCredentials().getPassword().trim().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).entity("La contraseña no puede estar vacía.").build();
         }
 
         // Validar el rol
-        String role = user.getRole();
-        if (role == null || (!role.equals("CUSTOMER") && !role.equals("ADMIN"))) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("El rol del usuario no es válido. Debe ser 'CUSTOMER' o 'ADMIN'.").build();
+        boolean cityHall= user.getCityHall();
+        if (!cityHall) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("El usuario no pertenece al ayuntamiento").build();
         }
 
         // Verificar si el username ya existe
         List<Credentials> existingCredentials = em.createQuery("SELECT c FROM Credentials c WHERE c.username = :username", Credentials.class)
-                                                  .setParameter("username", user.getUsername())
+                                                  .setParameter("username", user.getCredentials().getUsername())
                                                   .getResultList();
         if (!existingCredentials.isEmpty()) {
             return Response.status(Response.Status.CONFLICT).entity("El nombre de usuario ya existe").build();
@@ -164,9 +117,8 @@ public class CustomerFacadeREST {
 
             // Crear las credenciales asociadas
             Credentials credentials = new Credentials();
-            credentials.setUsername(user.getUsername());
-            credentials.setPassword(user.getPassword());
-            credentials.setCustomer(user);
+            credentials.setUsername(user.getCredentials().getUsername());
+            credentials.setPassword(user.getCredentials().getPassword());
             em.persist(credentials);
 
             URI uri = uriInfo.getAbsolutePathBuilder().path(Long.toString(user.getId())).build();
@@ -180,37 +132,29 @@ public class CustomerFacadeREST {
     // DELETE /rest/api/v1/customer/{id} - Opcional: Eliminar un usuario
     @DELETE
     @Path("{id}")
-    public Response deleteCustomer(@PathParam("id") Long id, @Context SecurityContext securityContext) {
+    public Response deleteUser(@PathParam("id") Long id, @Context SecurityContext securityContext) {
         if (securityContext.getUserPrincipal() == null) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Autenticación requerida").build();
         }
 
-        Customer customer = em.find(Customer.class, id);
+        Usuario customer = em.find(Usuario.class, id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Cliente no encontrado").build();
         }
 
-        String authenticatedUsername = securityContext.getUserPrincipal().getName();
-        boolean isAdmin = securityContext.isUserInRole("ADMIN");
+        /*String username = securityContext.getUserPrincipal().getName();
 
         // Verificar permisos: el cliente puede eliminarse a sí mismo o debe ser un administrador
-        if (!authenticatedUsername.equals(customer.getUsername()) && !isAdmin) {
+        if (!username.getCityHall()) {
             return Response.status(Response.Status.FORBIDDEN).entity("No tienes permiso para eliminar este cliente").build();
-        }
+        }*/
 
         try {
             // Eliminar credenciales asociadas
-            TypedQuery<Credentials> query = em.createQuery("SELECT c FROM Credentials c WHERE c.customer.id = :customerId", Credentials.class);
+            TypedQuery<Credentials> query = em.createQuery("SELECT c.credentials FROM Usuario c WHERE c.credentials.id = :customerId", Credentials.class);
             List<Credentials> credentials = query.setParameter("customerId", id).getResultList();
             for (Credentials cred : credentials) {
                 em.remove(cred);
-            }
-
-            // Eliminar artículos asociados
-            TypedQuery<Article> articleQuery = em.createQuery("SELECT a FROM Article a WHERE a.author.id = :customerId", Article.class);
-            List<Article> articles = articleQuery.setParameter("customerId", id).getResultList();
-            for (Article article : articles) {
-                em.remove(article);
             }
 
             // Finalmente, eliminar el cliente

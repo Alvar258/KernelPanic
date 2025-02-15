@@ -2,7 +2,7 @@ package authn;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement; 
-import model.entities.Customer;
+import model.entities.Usuario;
 import authn.JWTUtil;
 
 @Entity
@@ -15,24 +15,15 @@ public class Credentials implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Credentials_Gen")
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @OneToOne
-    @JoinColumn(name = "customer_id", nullable = false, unique = true)
-    private Customer customer;
-
     @Transient
     private String jwtToken;
-    // Constructor sin parámetros
-    public Credentials() {}
     
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(nullable = false, unique = true)
+    private String username;
+    // Constructor sin parámetros
      
     public Long getId() {
         return id;
@@ -41,13 +32,13 @@ public class Credentials implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getUsername() {
-        return username;
+    
+    public String getJwtToken() {
+        return jwtToken;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 
     public String getPassword() {
@@ -58,17 +49,16 @@ public class Credentials implements Serializable {
         this.password = password;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    
+    public String getUsername() {
+        return username;
     }
 
-    public String getJwtToken() {
-        return jwtToken;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
-    public void setJwtToken(String jwtToken) {
-        this.jwtToken = jwtToken;
-    }
+    
+    public Credentials() {}
 
     public String generateJwtToken() {
         this.jwtToken = JWTUtil.generateToken(this.username);

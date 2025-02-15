@@ -15,7 +15,7 @@ import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
 import jakarta.ws.rs.core.SecurityContext;
-import model.entities.Customer;
+import model.entities.Usuario;
 import authn.JWTUtil;
 
 @Provider
@@ -41,22 +41,15 @@ public class RESTRequestFilter implements ContainerRequestFilter {
         String token = authHeader.replace(AUTHORIZATION_HEADER_PREFIX, "");
 
         try {
-            String username = JWTUtil.validateToken(token);
-            TypedQuery<Credentials> query = em.createNamedQuery("Credentials.findUser", Credentials.class);
-            Credentials credentials = query.setParameter("username", username).getSingleResult();
-
-            Customer customer = credentials.getCustomer(); // Obtener el cliente asociado
-            String role = customer.getRole(); // Obtener el rol del cliente
-
+            String usernametoken = JWTUtil.validateToken(token);
+            
+            System.out.println(usernametoken);
+            
+            
             requestCtx.setSecurityContext(new SecurityContext() {
                 @Override
                 public Principal getUserPrincipal() {
-                    return () -> username;
-                }
-
-                @Override
-                public boolean isUserInRole(String checkRole) {
-                    return role.equals(checkRole);
+                    return () -> usernametoken;
                 }
 
                 @Override
@@ -68,9 +61,13 @@ public class RESTRequestFilter implements ContainerRequestFilter {
                 public String getAuthenticationScheme() {
                     return "BEARER";
                 }
+
+                @Override
+                public boolean isUserInRole(String role) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
             });
 
-            System.out.println("User authenticated: " + username + " with role: " + role);
         } catch (NoResultException e) {
             requestCtx.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("User not found").build());
         } catch (Exception e) {
