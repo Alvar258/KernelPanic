@@ -31,26 +31,37 @@
 
         String[] data = {
             
-            
             // Estados
             "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'Abierto')",
             "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'En proceso')",
             "INSERT INTO STATE (id, name) VALUES (NEXT VALUE FOR Estado_Gen, 'Cerrado')",
 
             // Municipios
-            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad A')",
-            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad B')",
-            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Ciudad C')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Altafulla')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Constantí')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Creixell')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Perafort')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Renau')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Roda de Berà')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Salomó')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Salou')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Tarragona')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Torredembarra')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Vespella de Gaià')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Vila-Seca')",
+            "INSERT INTO Municipio (id, name) VALUES (NEXT VALUE FOR Municipio_Gen, 'Vilallonga del Camp')",
 
+
+            
             // Tipos de Incidencia
             "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Infraestructura')",
             "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Vial')",
             "INSERT INTO TiposIncidencia (id, name) VALUES (NEXT VALUE FOR TiposIncidencia_Gen, 'Limpieza')",
 
             //Credenciales
-            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user1pass', 'user1')",
-            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user2pass', 'user2')",
-            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Estado_Gen, 'user3pass', 'user3')",
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Credentials_Gen, 'user1pass', 'user1')",
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Credentials_Gen, 'user2pass', 'user2')",
+            "INSERT INTO CREDENTIALS (id, password, username) VALUES (NEXT VALUE FOR Credentials_Gen, 'user3pass', 'user3')",
  
             // Usuarios
             "INSERT INTO Usuario (id, cityHall, ImageURL) VALUES (NEXT VALUE FOR Usuario_Gen, 1, 'http://example.com/image1.jpg')",

@@ -75,7 +75,7 @@ public class Sugerencia implements Serializable {
     @Column(nullable = false)
     private String street;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String type;
 
     @Column(nullable = false)
