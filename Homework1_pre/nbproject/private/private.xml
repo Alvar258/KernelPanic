@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/Incidencia.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/web/WEB-INF/views/index.jsp</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/Municipio.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/controller/LoginController.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/controller/IncidentControllerHelper.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/EstadoFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/controller/RegisterController.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/TiposFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/web/WEB-INF/views/newIncident.jsp</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/web/resources/js/map.js</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/controller/RootController.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/Sugerencia.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/SugerenciaFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/IncidenciaFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/client/IncidentRestClient.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/TiposIncidencia.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/Estado.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/UsuarioFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/IncidentDTO.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/MunicipioFacadeREST.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/web/install.jsp</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/service/RESTapp.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/model/entities/Usuario.java</file>
+            <file>file:/Z:/Documents/Informática/KernelPanic/Homework1_pre/src/java/controller/IncidentController.java</file>
+        </group>
+    </open-files>
+</project-private>

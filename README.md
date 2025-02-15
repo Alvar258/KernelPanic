@@ -1,5 +1,5 @@
 
-# 📌 FixCity
+# 📌 FixTarraco
 
 **Plataforma de Reporte y Mejora Urbana para Tarragona**
 
@@ -9,15 +9,15 @@ Se trata de una aplicación web diseñada para que los ciudadanos puedan reporta
 
 ### *Álvaro*
 
-[![Email](https://img.shields.io/badge/Email-<adreca-correu1>-blue)](mailto:<adreca-correu1>)
+[![Email](https://img.shields.io/badge/Email-<alvaro.lucas@estudiants.urv.cat>-blue)](mailto:<alvaro.lucas@estudiants.urv.cat>)
 
-[![GitHub](https://img.shields.io/badge/GitHub-<nom-usuari-github1>-black?logo=github)](https://github.com/<nom-usuari-github1>)
+[![GitHub](https://img.shields.io/badge/GitHub-<Alvar258>-black?logo=github)](https://github.com/<Alvar258>)
 
 ### *Elena* 
 
-[![Email](https://img.shields.io/badge/Email-<adreca-correu2>-blue)](mailto:<adreca-correu2>)
+[![Email](https://img.shields.io/badge/Email-<elena.diez@estudiants.urv.cat>-blue)](mailto:<elena.diez@estudiants.urv.cat>)
 
-[![GitHub](https://img.shields.io/badge/GitHub-<nom-usuari-github2>-black?logo=github)](https://github.com/<nom-usuari-github2>)
+[![GitHub](https://img.shields.io/badge/GitHub-<eleniitaa8>-black?logo=github)](https://github.com/<eleniitaa8>)
 
 ### *Marina*
 

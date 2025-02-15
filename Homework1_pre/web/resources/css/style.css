@@ -1,0 +1,797 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #007aff;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    background: linear-gradient(to right, #007aff, #34c759);
+    color: white;
+    padding: 80px 20px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Layout principal: Mapa y Filtros */
+.main-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 40px;
+    align-items: flex-start; /* Asegura que ambos paneles comiencen al mismo nivel */
+}
+
+.map-container {
+    flex: 2;
+    height: 500px; /* Tamaño reducido para que no ocupe toda la hoja */
+}
+
+/* Panel lateral: forzamos una altura fija */
+.side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 500px; /* Altura total igual a la del mapa */
+}
+
+/* Los botones superiores pueden tener una altura fija */
+.filter-top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* Opcional: definir una altura fija si lo necesitas, por ejemplo: */
+    height: 60px;
+}
+
+/* El contenedor de filtros ocupa el resto del espacio */
+.filter-container {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+.map-container {
+    flex: 2;
+    height: 500px; /* Tamaño reducido para que no ocupe toda la hoja */
+}
+
+.filter-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+/* Botón flotante para crear incidencia */
+.btn-add-incident {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.btn-add-incident:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+.btn-view-incidents {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    padding: 15px 20px; /* Reduce el padding */
+    font-size: 20px; /* Ajusta el tamaño del icono */
+    border-radius: 50%; /* Botón completamente circular */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.btn-view-incidents:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+/* Filter Form (dentro del panel de filtros) */
+.filter-container h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+}
+.filter-container form div {
+    margin-bottom: 15px;
+}
+.filter-container form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+.filter-container form input,
+.filter-container form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Botones generales */
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+.btn-primary:hover {
+    background-color: #005bb5;
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Lista de incidències (cards) */
+.incident-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 40px;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+.incident-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.incident-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.incident-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.incident-card .card-body {
+    padding: 15px;
+}
+
+.incident-card .card-body h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.incident-card .card-body p.summary {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.incident-card .card-body .meta {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* Formulario de incidències */
+.incident-form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.form-title {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Inputs y Textareas */
+.article-form input[type="text"],
+.article-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.article-form input[type="text"]:focus,
+.article-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Checkbox y acciones en formularios */
+.checkbox-group {
+    margin-top: 1.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-text {
+    margin-left: 0.5rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Otros estilos existentes se mantienen, ajusta según necesites... */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    .nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .hero {
+        padding: 50px 10px;
+    }
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .main-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .map-container, .filter-container {
+        height: 400px;
+    }
+    .incident-list {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav ul li a {
+        padding: 10px 0;
+        border-top: 1px solid #ddd;
+    }
+    .nav ul li a:first-child {
+        border-top: none;
+    }
+    .main-container {
+        padding: 10px;
+    }
+    .map-container, .filter-container {
+        height: 350px;
+    }
+    .incident-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* ============================= */
+/* Estilos para Registro e Inicio de Sesión (Auth) */
+/* ============================= */
+.auth-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #007aff, #34c759);
+    padding: 20px;
+}
+
+.auth-container {
+    background-color: #fff;
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-container h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.auth-container .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #007aff;
+    outline: none;
+}
+
+.auth-container .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.auth-container p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.auth-container .btn-link {
+    color: #007aff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.auth-container .btn-link:hover {
+    color: #005bb5;
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 15px;
+}
+/* ============================= */
+/* Estilos para el Footer */
+/* ============================= */
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 40px;
+    margin-top: 40px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.footer-team {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    font-size: 0.9rem;
+}
+
+.footer-team li {
+    margin: 5px 0;
+}
+
+/* ============================= */
+/* Estilos para panel de Incidencias/Sugerencias */
+/* ============================= */
+.admin-panel {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  
+  /* Encabezado interno con pestañas */
+  /*Encabezado preestablecido*/
+  .tab-header {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    background-color: #f7f7f7;
+  }
+  
+  .tab-header .tab-button {
+    flex: 1;
+    padding: 12px 0;
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .tab-header .tab-button:last-child {
+    border-right: none;
+  }
+  
+  /* Estilo para la pestaña activa */
+  .tab-header .tab-button.active,
+  .tab-header .tab-button:hover {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  /*Estilos para viewIncidents*/
+    .tab-header2 {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      background-color: #e6f0ff;
+    }
+    .tab-header2 .tab-button2 {
+      flex: 1;
+      padding: 12px 0;
+      background-color: transparent;
+      border: none;
+      border-right: 1px solid #ddd;
+      font-size: 1rem;
+      color: #0056b3;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .tab-header2 .tab-button2:last-child {
+      border-right: none;
+    }
+    .tab-header2 .tab-button2.active,
+    .tab-header2 .tab-button2:hover {
+      background-color: #007aff;
+      color: #fff;
+    }
+    /* Centrado y estilo para los títulos */
+    .tab-content2 h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007aff;
+    }
+  
+    /*NewIncident.jsp*/
+        .new-incident-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .new-incident-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007aff;
+    }
+    .new-incident-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .new-incident-container label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+      color: #333;
+    }
+    .new-incident-container input[type="text"],
+    .new-incident-container textarea,
+    .new-incident-container input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .new-incident-container button {
+      padding: 10px;
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .new-incident-container button:hover {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+    #geoMessage {
+      font-style: italic;
+      color: #555;
+      margin-top: 5px;
+    }
+    .geo-btn {
+      margin-top: 5px;
+      padding: 8px 12px;
+      background-color: #34c759;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+    .geo-btn:hover {
+      background-color: #2fa44f;
+    }
+    
+    /*jsp new incident*/
+    .new-form-tab-header {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      background-color: #e6f0ff;
+      margin-bottom: 20px;
+    }
+    .new-form-tab-header .new-form-tab-button {
+      flex: 1;
+      padding: 12px 0;
+      background-color: transparent;
+      border: none;
+      border-right: 1px solid #ddd;
+      font-size: 1rem;
+      color: #0056b3;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .new-form-tab-header .new-form-tab-button:last-child {
+      border-right: none;
+    }
+    .new-form-tab-header .new-form-tab-button.active,
+    .new-form-tab-header .new-form-tab-button:hover {
+      background-color: #007aff;
+      color: #fff;
+    }
+    /* Estilo para el título del formulario */
+    .new-incident-container h1 {
+      text-align: center;
+      color: #007aff;
+    }
+    /* Contenedor de la categoría (solo para incidencias) */
+    #newCategoriaContainer {
+      display: none;
+    }
+    
+    
+  /* Contenido de cada pestaña */
+  .tab-content {
+    padding: 20px 30px;
+  }
+  
+  /* Filtros de incidencias */
+  .form-group {
+    margin: 20px 0;
+  }
+  
+  .topics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .topic-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ececec;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .topic-chip:hover {
+    background-color: #d8d8d8;
+  }
+  
+  .topic-chip input {
+    margin-right: 5px;
+  }
+  
+  /* Tablas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  table thead {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  table th,
+  table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Paginación */
+  .paginacion {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .pagination {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .pagination li {
+    margin: 0 5px;
+  }
+  
+  .pagination li a {
+    display: block;
+    padding: 6px 10px;
+    background-color: #f5f5f5;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .pagination li a:hover {
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  .pagination li a.active {
+    background-color: #ccc;
+    color: #333;
+    border-color: #bbb;
+  }
+  
