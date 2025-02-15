@@ -1,2 +1,3 @@
 
-<img src="../Diagrama_Uno.png" alt="Imagen">
+![Descripción de la imagen](Diagrama_Uno.png)
+
