@@ -1,0 +1,2877 @@
+{
+	"info": {
+		"_postman_id": "884e7c18-ff46-484e-9ed2-3cc289d3090a",
+		"name": "API Blogging",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39359095"
+	},
+	"item": [
+		{
+			"name": "Token_admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener la respuesta como texto\r",
+							"const responseText = pm.response.text();\r",
+							"\r",
+							"// Asumimos que toda la respuesta es el token\r",
+							"const token = responseText.trim(); // Eliminar espacios en blanco innecesarios\r",
+							"\r",
+							"// Verificar que el token no está vacío\r",
+							"if (token) {\r",
+							"    // Guardar el token en una variable de entorno\r",
+							"    pm.environment.set(\"jwt_token_admin\", token);\r",
+							"    console.log(\"Token JWT guardado en la variable de entorno 'jwt_token_admin'.\");\r",
+							"} else {\r",
+							"    console.error(\"No se encontró el token en la respuesta.\");\r",
+							"    // Opcional: Fallar la prueba si el token no está presente\r",
+							"    pm.test(\"Token JWT no encontrado en la respuesta\", function () {\r",
+							"        pm.expect(token).to.exist;\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"adminpass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token_user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener la respuesta como texto\r",
+							"const responseText = pm.response.text();\r",
+							"\r",
+							"// Asumimos que toda la respuesta es el token\r",
+							"const token = responseText.trim(); // Eliminar espacios en blanco innecesarios\r",
+							"\r",
+							"// Verificar que el token no está vacío\r",
+							"if (token) {\r",
+							"    // Guardar el token en una variable de entorno\r",
+							"    pm.environment.set(\"jwt_token_user1\", token);\r",
+							"    console.log(\"Token JWT guardado en la variable de entorno 'jwt_token_user1'.\");\r",
+							"} else {\r",
+							"    console.error(\"No se encontró el token en la respuesta.\");\r",
+							"    // Opcional: Fallar la prueba si el token no está presente\r",
+							"    pm.test(\"Token JWT no encontrado en la respuesta\", function () {\r",
+							"        pm.expect(token).to.exist;\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user1\",\r\n  \"password\": \"user1pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token_user2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener la respuesta como texto\r",
+							"const responseText = pm.response.text();\r",
+							"\r",
+							"// Asumimos que toda la respuesta es el token\r",
+							"const token = responseText.trim(); // Eliminar espacios en blanco innecesarios\r",
+							"\r",
+							"// Verificar que el token no está vacío\r",
+							"if (token) {\r",
+							"    // Guardar el token en una variable de entorno\r",
+							"    pm.environment.set(\"jwt_token_user2\", token);\r",
+							"    console.log(\"Token JWT guardado en la variable de entorno 'jwt_token_user2'.\");\r",
+							"} else {\r",
+							"    console.error(\"No se encontró el token en la respuesta.\");\r",
+							"    // Opcional: Fallar la prueba si el token no está presente\r",
+							"    pm.test(\"Token JWT no encontrado en la respuesta\", function () {\r",
+							"        pm.expect(token).to.exist;\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user2\",\r\n  \"password\": \"user2pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token_user3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener la respuesta como texto\r",
+							"const responseText = pm.response.text();\r",
+							"\r",
+							"// Asumimos que toda la respuesta es el token\r",
+							"const token = responseText.trim(); // Eliminar espacios en blanco innecesarios\r",
+							"\r",
+							"// Verificar que el token no está vacío\r",
+							"if (token) {\r",
+							"    // Guardar el token en una variable de entorno\r",
+							"    pm.environment.set(\"jwt_token_user3\", token);\r",
+							"    console.log(\"Token JWT guardado en la variable de entorno 'jwt_token_user3'.\");\r",
+							"} else {\r",
+							"    console.error(\"No se encontró el token en la respuesta.\");\r",
+							"    // Opcional: Fallar la prueba si el token no está presente\r",
+							"    pm.test(\"Token JWT no encontrado en la respuesta\", function () {\r",
+							"        pm.expect(token).to.exist;\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user3\",\r\n  \"password\": \"user3pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token_user4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener la respuesta como texto\r",
+							"const responseText = pm.response.text();\r",
+							"\r",
+							"// Asumimos que toda la respuesta es el token\r",
+							"const token = responseText.trim(); // Eliminar espacios en blanco innecesarios\r",
+							"\r",
+							"// Verificar que el token no está vacío\r",
+							"if (token) {\r",
+							"    // Guardar el token en una variable de entorno\r",
+							"    pm.environment.set(\"jwt_token_user4\", token);\r",
+							"    console.log(\"Token JWT guardado en la variable de entorno 'jwt_token_user4'.\");\r",
+							"} else {\r",
+							"    console.error(\"No se encontró el token en la respuesta.\");\r",
+							"    // Opcional: Fallar la prueba si el token no está presente\r",
+							"    pm.test(\"Token JWT no encontrado en la respuesta\", function () {\r",
+							"        pm.expect(token).to.exist;\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user4\",\r\n  \"password\": \"user4pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token_wrong_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains error message\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"Invalid credentials\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"userpepito\",\r\n  \"password\": \"user3pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del cliente\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.a(\"number\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"nuevoUsuarioPostma\",\r\n    \"password\": \"contraseñaSegura\",\r\n    \"role\": \"CUSTOMER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_user_Repeated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del cliente\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"El nombre de usuario ya existe\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"nuevoUsuarioPostma\",\r\n    \"password\": \"contraseñaSegura\",\r\n    \"role\": \"CUSTOMER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_user_Bad_Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del cliente\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"El nombre de usuario no puede estar vacío.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"contraseñaSegura\",\r\n    \"role\": \"CUSTOMER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_user_Wrong_Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del cliente\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"La contraseña no puede estar vacía.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"nuevoUsuarioPostma\",\r\n    \"password\": \"\",\r\n    \"role\": \"CUSTOMER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_user_Wrong_Rol",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del cliente\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"El rol del usuario no es válido. Debe ser 'CUSTOMER' o 'ADMIN'.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"nuevoUsuarioPostma\",\r\n    \"password\": \"contraseñaSegura\",\r\n    \"role\": \"Virus\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_no_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 5\", function () {\r",
+							"        pm.expect(articles.length).to.eql(5); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_Health_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?topic=Health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Health"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_Health_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?topic=Health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Health"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_Health&User_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 1\", function () {\r",
+							"        pm.expect(articles.length).to.eql(1); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?topic=Health&author=admin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Health"
+						},
+						{
+							"key": "author",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_Health&User_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 1\", function () {\r",
+							"        pm.expect(articles.length).to.eql(1); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?topic=Technology&author=admin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Technology"
+						},
+						{
+							"key": "author",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_Health&Technology&User_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 1\", function () {\r",
+							"        pm.expect(articles.length).to.eql(1); // 1 artículo público\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?topic=Health&author=admin&topic=Technology",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Health"
+						},
+						{
+							"key": "author",
+							"value": "admin"
+						},
+						{
+							"key": "topic",
+							"value": "Technology"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_User_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 1\", function () {\r",
+							"        pm.expect(articles.length).to.eql(1); // 1 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 2 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?author=admin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_of_User_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 1\", function () {\r",
+							"        pm.expect(articles.length).to.eql(1); // 1 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 2\", function () {\r",
+							"        pm.expect(articles.length).to.eql(2); // 2 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article?author=admin",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					],
+					"query": [
+						{
+							"key": "author",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_Auth_Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 5\", function () {\r",
+							"        pm.expect(articles.length).to.eql(5); // 3 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_articles_Auth_User4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Obtener el cuerpo de la respuesta como JSON\r",
+							"const articles = pm.response.json();\r",
+							"\r",
+							"// Verificar el estado de la respuesta\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    pm.expect(articles).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"if (!pm.request.headers.has(\"Authorization\")) {\r",
+							"    // Caso: Sin autenticación\r",
+							"    pm.test(\"El tamaño del array sin autenticación es 3\", function () {\r",
+							"        pm.expect(articles.length).to.eql(3); // 2 artículos públicos\r",
+							"    });\r",
+							"} else {\r",
+							"    // Caso: Con autenticación\r",
+							"    pm.test(\"El tamaño del array con autenticación es 4\", function () {\r",
+							"        pm.expect(articles.length).to.eql(4); // 4 artículos (incluyendo el privado)\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user4}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_a_private_article_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 401\r",
+							"pm.test(\"Estado es 401 Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo contiene el mensaje esperado\r",
+							"pm.test(\"Mensaje correcto en el cuerpo\", function () {\r",
+							"    const responseText = pm.response.text(); // Obtener el cuerpo como texto\r",
+							"    pm.expect(responseText).to.include(\"Autenticación requerida para artículos privados.\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_an_article_Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El artículo tiene los campos esperados\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"title\");\r",
+							"    pm.expect(jsonData).to.have.property(\"content\");\r",
+							"    pm.expect(jsonData).to.have.property(\"authorName\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/article/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_an_article_Auth Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El artículo tiene los campos esperados\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"title\");\r",
+							"    pm.expect(jsonData).to.have.property(\"content\");\r",
+							"    pm.expect(jsonData).to.have.property(\"authorName\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_an_article_XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El contenido parece XML\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.match(/^<\\?xml /); // Verifica que comienza con la declaración XML\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El artículo tiene los campos esperados\", function () {\r",
+							"    const responseXml = pm.response.text();\r",
+							"\r",
+							"    // Verificar que los campos clave existen en el XML\r",
+							"    pm.expect(responseXml).to.include(\"<title>\");\r",
+							"    pm.expect(responseXml).to.include(\"<content>\");\r",
+							"    pm.expect(responseXml).to.include(\"<authorName>\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/article/1?format=xml",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "xml"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Artículo actualizado correctamente\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.title).to.eql(\"Updated Title\");\r",
+							"    pm.expect(response.content).to.eql(\"Updated content of my own article.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Updated Title\",\r\n    \"content\": \"Updated content of my own article.\",\r\n    \"summary\": \"Updated summary\",\r\n    \"imageUrl\": \"http://example.com/updated-image.jpg\",\r\n    \"isPrivate\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_article_XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"El contenido parece XML\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.match(/^<\\?xml /); // Verifica que comienza con la declaración XML\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"El artículo tiene los campos esperados\", function () {\r",
+							"    const responseXml = pm.response.text();\r",
+							"\r",
+							"    // Verificar que los campos clave existen en el XML\r",
+							"    pm.expect(responseXml).to.include(\"Updated Title on XML\");\r",
+							"    pm.expect(responseXml).to.include(\"<content>\");\r",
+							"    pm.expect(responseXml).to.include(\"<authorName>\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<article>\r\n    <title>Updated Title on XML</title>\r\n    <content>Updated content of my own article.</content>\r\n    <summary>Updated summary</summary>\r\n    <imageUrl>\"http://example.com/updated-image.jpg\"</imageUrl>\r\n    <isPrivate>true</isPrivate>\r\n</article>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_other_article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje de error correcto\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No tienes permiso para actualizar este artículo.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Trying to update\",\r\n    \"content\": \"Attempted update of another user's article.\",\r\n    \"summary\": \"Should fail\",\r\n    \"imageUrl\": \"http://example.com/fail-image.jpg\",\r\n    \"isPrivate\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_article_as_Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Artículo actualizado por admin correctamente\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.title).to.eql(\"Admin updated title\");\r",
+							"    pm.expect(response.content).to.eql(\"Admin updated content.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Admin updated title\",\r\n    \"content\": \"Admin updated content.\",\r\n    \"summary\": \"Admin updated summary\",\r\n    \"imageUrl\": \"http://example.com/admin-updated-image.jpg\",\r\n    \"isPrivate\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_user_myself",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje de éxito correcto\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Usuario actualizado correctamente.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"myUpdatedUser\",\r\n    \"password\": \"mynewpassword\",\r\n    \"role\": \"CUSTOMER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_other_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje de error correcto\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"No tienes permiso para actualizar este usuario.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"unauthorizedUpdate\",\r\n    \"password\": \"nopasswordchange\",\r\n    \"role\": \"CUSTOMER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_user_as_admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Mensaje de éxito correcto\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Usuario actualizado correctamente.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"newuser1\",\r\n    \"password\": \"newpassword\",\r\n    \"role\": \"CUSTOMER\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/customer/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene ID del artículo\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.a(\"number\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Nova Tecnologia en IA@#$%^&*\",\r\n    \"content\": \"Aquest article explora les últimes innovacions en Intel·ligència Artificial...\",\r\n    \"summary\": \"Explorant les innovacions en IA.\",\r\n    \"imageUrl\": \"http://example.com/ia.jpg\",\r\n    \"isPrivate\": false,\r\n    \"topics\": [\r\n        { \"name\": \"Technology\" },\r\n        { \"name\": \"Science\" }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article_noTitle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado debe ser 400 Bad Request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El mensaje debe indicar que el título es obligatorio\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"El título del artículo es obligatorio.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \" \",\r\n    \"content\": \"Aquest article explora les últimes innovacions en Intel·ligència Artificial...\",\r\n    \"summary\": \"Explorant les innovacions en IA.\",\r\n    \"imageUrl\": \"http://example.com/ia.jpg\",\r\n    \"isPrivate\": false,\r\n    \"topics\": [\r\n        { \"name\": \"Technology\" },\r\n        { \"name\": \"Science\" }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article_noContent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado debe ser 400 Bad Request\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El mensaje debe indicar que el título es obligatorio\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"El contenido del artículo es obligatorio.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Articulo sin contenido\",\r\n    \"content\": \"\",\r\n    \"summary\": \"Explorant les innovacions en IA.\",\r\n    \"imageUrl\": \"http://example.com/ia.jpg\",\r\n    \"isPrivate\": false,\r\n    \"topics\": [\r\n        { \"name\": \"Technology\" },\r\n        { \"name\": \"Science\" }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article_wrong_topic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains error message\", function () {\r",
+							"    var jsonData = pm.response.text();\r",
+							"   pm.expect(pm.response.text()).to.include(\"Algunos Topics proporcionados no son válidos.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Article amb Tòpics Invàlids\",\r\n    \"content\": \"Aquest article té tòpics que no existeixen...\",\r\n    \"summary\": \"Tòpics invàlids.\",\r\n    \"imageUrl\": \"http://example.com/invalid.jpg\",\r\n    \"isPrivate\": false,\r\n    \"topics\": [\r\n        { \"name\": \"InvalidTopic1\" },\r\n        { \"name\": \"InvalidTopic2\" }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article_XML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test para la solicitud POST\r",
+							"pm.test(\"Debe devolver un ID válido al crear el artículo\", function () {\r",
+							"    // Verificar que la solicitud POST fue exitosa\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"\r",
+							"    // Obtener el cuerpo de la respuesta\r",
+							"    let rawResponse = pm.response.text();\r",
+							"    console.log(\"Raw Response Body:\", rawResponse);\r",
+							"\r",
+							"    // Intentar parsear el ID\r",
+							"    let createdId;\r",
+							"    try {\r",
+							"        createdId = JSON.parse(rawResponse);\r",
+							"        if (typeof createdId === 'number') {\r",
+							"            // Correcto, es un número\r",
+							"        } else {\r",
+							"            throw new Error(\"El ID no es un número válido.\");\r",
+							"        }\r",
+							"    } catch (e) {\r",
+							"        // Si la respuesta no es JSON o el ID no es válido, intentar con XML\r",
+							"        let parser = new DOMParser();\r",
+							"        let xmlDoc = parser.parseFromString(rawResponse, \"application/xml\");\r",
+							"        let errorMsg = xmlDoc.getElementsByTagName(\"error\")[0]?.textContent || rawResponse;\r",
+							"        console.error(\"Error en la creación del artículo:\", errorMsg);\r",
+							"        pm.expect.fail(\"Error en la creación del artículo: \" + errorMsg);\r",
+							"    }\r",
+							"\r",
+							"    console.log(\"ID capturado:\", createdId);\r",
+							"\r",
+							"    // Validar que el ID es válido\r",
+							"    pm.expect(createdId, \"El ID del artículo no debe estar vacío\").to.exist;\r",
+							"    pm.expect(Number(createdId), \"El ID del artículo debe ser un número\").to.be.a(\"number\");\r",
+							"\r",
+							"    // Guardar el ID en el entorno para usarlo en la solicitud GET\r",
+							"    pm.environment.set(\"createdArticleId\", createdId);\r",
+							"    console.log(\"ID del artículo almacenado en el entorno:\", createdId);\r",
+							"});\r",
+							"\r",
+							"// Test para la solicitud GET\r",
+							"pm.test(\"Verificar que el artículo creado tiene el título correcto\", function (done) {\r",
+							"    let articleId = pm.environment.get(\"createdArticleId\");\r",
+							"    let baseUrl = pm.environment.get(\"base_url\");\r",
+							"    let authToken = pm.environment.get(\"jwt_token_admin\");\r",
+							"\r",
+							"    console.log(\"Base URL:\", baseUrl);\r",
+							"    console.log(\"Token JWT:\", authToken);\r",
+							"    console.log(\"ID del artículo:\", articleId);\r",
+							"\r",
+							"    // Validar que el ID esté definido y sea válido\r",
+							"    if (!articleId || isNaN(articleId)) {\r",
+							"        pm.expect.fail(\"El ID del artículo no está definido o es inválido. Revisa la respuesta del POST.\");\r",
+							"        return done();\r",
+							"    }\r",
+							"\r",
+							"    let getUrl = `${baseUrl}/article/${articleId}`;\r",
+							"    console.log(\"URL construida para GET:\", getUrl);\r",
+							"\r",
+							"    pm.sendRequest(\r",
+							"        {\r",
+							"            url: getUrl,\r",
+							"            method: \"GET\",\r",
+							"            header: {\r",
+							"                \"Authorization\": `Bearer ${authToken}`,\r",
+							"                \"Accept\": \"application/json\" // Añadido para especificar el formato de respuesta\r",
+							"            },\r",
+							"        },\r",
+							"        function (err, res) {\r",
+							"            if (err) {\r",
+							"                console.error(\"Error en la solicitud GET:\", err);\r",
+							"                pm.expect.fail(\"Falló la solicitud GET: \" + err.message);\r",
+							"                return done();\r",
+							"            }\r",
+							"\r",
+							"            console.log(\"Estado de la respuesta GET:\", res.status);\r",
+							"            console.log(\"Cuerpo de la respuesta GET:\", res.text());\r",
+							"\r",
+							"            // Validar el estado de la respuesta\r",
+							"            pm.test(\"La solicitud GET debe ser exitosa\", function () {\r",
+							"                pm.expect(res).to.have.status(200);\r",
+							"            });\r",
+							"\r",
+							"            let responseBody;\r",
+							"            let contentType = res.headers.get(\"Content-Type\");\r",
+							"            console.log(\"Content-Type de la respuesta GET:\", contentType);\r",
+							"\r",
+							"            if (contentType.includes(\"application/json\")) {\r",
+							"                responseBody = res.json();\r",
+							"                console.log(\"Respuesta GET (JSON):\", responseBody);\r",
+							"            } else if (contentType.includes(\"application/xml\")) {\r",
+							"                let parser = new DOMParser();\r",
+							"                let xmlDoc = parser.parseFromString(res.text(), \"application/xml\");\r",
+							"                responseBody = {\r",
+							"                    title: xmlDoc.getElementsByTagName(\"title\")[0]?.textContent,\r",
+							"                };\r",
+							"                console.log(\"Respuesta GET (XML):\", responseBody);\r",
+							"            } else if (contentType.includes(\"text/html\")) {\r",
+							"                console.error(\"El servidor devolvió HTML en lugar del contenido esperado.\");\r",
+							"                console.log(\"HTML devuelto:\", res.text());\r",
+							"                pm.expect.fail(\"Tipo de contenido inesperado en GET: \" + contentType);\r",
+							"                return done();\r",
+							"            } else {\r",
+							"                pm.expect.fail(\"Tipo de contenido desconocido en GET: \" + contentType);\r",
+							"            }\r",
+							"\r",
+							"            // Validar que el título del artículo coincide con el esperado\r",
+							"            pm.test(\"El título del artículo debe coincidir con el enviado\", function () {\r",
+							"                pm.expect(responseBody.title).to.eql(\"Nuevo Artículo XML\");\r",
+							"            });\r",
+							"\r",
+							"            done();\r",
+							"        }\r",
+							"    );\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<article>\r\n    <title>Nuevo Artículo XML</title>\r\n    <content>Contenido del artículo de prueba.</content>\r\n    <summary>Prueba de un articulo en XML.</summary>\r\n    <imageUrl>http://example.com/xml.jpg</imageUrl>\r\n    <topics>\r\n        <name>Technology</name>\r\n    </topics>\r\n</article>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_article_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Debe devolver 401 Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Debe incluir 'Autenticación requerida'\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Autenticación requerida\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Nuevo Artículo\",\r\n    \"content\": \"Este es el contenido del artículo.\",\r\n    \"summary\": \"Resumen del artículo.\",\r\n    \"imageUrl\": \"http://example.com/image.jpg\",\r\n    \"isPrivate\": false\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/article",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_article_noAuthn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 401\r",
+							"pm.test(\"Estado es 401 Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"// Verificar el mensaje en el cuerpo (si lo hay)\r",
+							"pm.test(\"Mensaje correcto en el cuerpo\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.include(\"Autenticación requerida\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_article_of_other_costumer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 403\r",
+							"pm.test(\"Estado es 403 Forbidden\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"// Verificar el mensaje en el cuerpo\r",
+							"pm.test(\"Mensaje correcto en el cuerpo\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.include(\"No tienes permiso para eliminar este artículo\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta no tiene cuerpo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.be.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_specific_customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado es 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta contiene datos del cliente\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"username\");\r",
+							"    pm.expect(jsonData).to.have.property(\"role\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 200\r",
+							"pm.test(\"Estado es 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo es un array\r",
+							"pm.test(\"El cuerpo es un array\", function () {\r",
+							"    const customers = pm.response.json();\r",
+							"    pm.expect(customers).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"// Verificar el tamaño del array\r",
+							"pm.test(\"El tamaño del array es 7\", function () {\r",
+							"    const customers = pm.response.json();\r",
+							"    pm.expect(customers.length).to.eql(7); // Esperamos exactamente 4 clientes\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_customer_noAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 401\r",
+							"pm.test(\"Estado es 401 Unauthorized\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"// Verificar el mensaje en el cuerpo\r",
+							"pm.test(\"Mensaje correcto en el cuerpo\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.include(\"Autenticación requerida\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_other_customer_noADMIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 403\r",
+							"pm.test(\"Estado es 403 Forbidden\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"// Verificar el mensaje en el cuerpo\r",
+							"pm.test(\"Mensaje correcto en el cuerpo\", function () {\r",
+							"    const responseText = pm.response.text();\r",
+							"    pm.expect(responseText).to.include(\"No tienes permiso para eliminar este cliente\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_myself",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 204\r",
+							"pm.test(\"Estado es 204 No Content\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo está vacío\r",
+							"pm.test(\"El cuerpo está vacío\", function () {\r",
+							"    pm.expect(pm.response.text()).to.be.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_user3}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer/4",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_as_admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verificar que el código de estado sea 204\r",
+							"pm.test(\"Estado es 204 No Content\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"// Verificar que el cuerpo está vacío\r",
+							"pm.test(\"El cuerpo está vacío\", function () {\r",
+							"    pm.expect(pm.response.text()).to.be.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token_admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/customer/3",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"customer",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

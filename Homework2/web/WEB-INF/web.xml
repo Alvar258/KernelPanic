@@ -1,0 +1,77 @@
+<web-app
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                        http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+    version="4.0">
+
+    <display-name>Incidencias</display-name>
+
+    <!-- Filter per servir /css/ i /js/ des de WEB-INF/resources -->
+    <filter>
+        <filter-name>ResourceFilter</filter-name>
+        <filter-class>filter.ResourceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ResourceFilter</filter-name>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>
+        <url-pattern>/images/*</url-pattern>
+    </filter-mapping>
+
+    <!-- RootController -->
+    <servlet>
+        <servlet-name>RootController</servlet-name>
+        <servlet-class>controller.RootController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootController</servlet-name>
+        <url-pattern>/RootController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Autenticación -->
+    <servlet>
+        <servlet-name>AuthController</servlet-name>
+        <servlet-class>controller.AuthController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthController</servlet-name>
+        <url-pattern>/AuthController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+
+    <!-- Pàgines principals -->
+    <welcome-file-list>
+        <welcome-file>install.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Error 404 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error404.jsp</location>
+    </error-page>
+
+    <!-- Error genèric (opcional) -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/error.jsp</location>
+    </error-page>
+
+</web-app>
