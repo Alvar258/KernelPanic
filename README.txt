@@ -1,2 +1,2 @@
 
-<img src="Diagrama_Uno.png" alt="Imagen">
+<img src="../Diagrama_Uno.png" alt="Imagen">
