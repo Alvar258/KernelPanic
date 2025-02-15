@@ -1,3 +1,3 @@
 
-![Descripción de la imagen](Diagrama_Uno.png)
+![Descripción de la imagen](https://github.com/Alvar258/KernelPanic/blob/main/Diagrama_Uno.png?raw=true)
 
