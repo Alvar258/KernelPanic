@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Inicializa el mapa centrado en Tarragona (lat: 41.1189, lng: 1.2445)
+    // Inicializa el mapa centrado en Tarragona
     const map = L.map('map').setView([41.1189, 1.2445], 13);
-
-    // Añadir capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
@@ -12,84 +10,80 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentLatLng = null;
     const popupForm = document.getElementById('popupForm');
 
-    // Mapeo para convertir tipo numérico a texto (si fuera necesario)
-    const typeMapping = {
-        "1": "Infraestructura",
-        "2": "Vial",
-        "3": "Sugerencia"
-    };
+    // Se asume que en el HTML se tiene un <select id="markerType"> con opciones "Incidencia" y "Sugerencia"
+    // Por ejemplo:
+    // <select id="markerType">
+    //    <option value="Incidencia">Incidencia</option>
+    //    <option value="Sugerencia">Sugerencia</option>
+    // </select>
 
-    // Función para determinar el color del marcador según el tipo
-    function getMarkerColor(typeName) {
-        if (typeName === 'Infraestructura') {
+    // Funciones para determinar color y emoji según la categoría
+    function getMarkerColor(category) {
+        const cat = category.toLowerCase();
+        if (cat === 'infraestructura') {
             return 'red';
-        } else if (typeName === 'Vial') {
-            return 'blue';
-        } else if (typeName === 'Sugerencia') {
+        } else if (cat === 'sugerencia') {
             return 'green';
         } else {
             return 'yellow';
         }
     }
 
-    // Función para obtener el emoji según el tipo
-    function getTypeEmoji(typeName) {
-        if (typeName === 'Infraestructura') {
+    function getCategoryEmoji(category) {
+        const cat = category.toLowerCase();
+        if (cat === 'infraestructura') {
             return '🚧';
-        } else if (typeName === 'Vial') {
-            return '🛣️';
-        } else if (typeName === 'Sugerencia') {
+        } else if (cat === 'sugerencia') {
             return '💡';
         } else {
             return '';
         }
     }
+// Función para parsear la respuesta de clasificación
+    function parseClassificationResponse(rawText) {
+        try {
+            // Intentamos parsear directamente
+            return JSON.parse(rawText);
+        } catch (e) {
+            // Si falla, limpiamos los delimitadores Markdown
+            const cleaned = rawText.replace(/```json\s*/i, '').replace(/\s*```/g, '').trim();
+            return JSON.parse(cleaned);
+        }
+    }
 
-    // Función para crear un icono personalizado para el marcador
-    function createCustomMarkerIcon(typeName) {
+    function createCustomMarkerIcon(category) {
         return L.divIcon({
             className: 'custom-marker',
-            html: `<div style="background-color: ${getMarkerColor(typeName)}; width:24px; height:24px; border-radius:50%; text-align:center; line-height:24px; font-size:16px; color:white;">${getTypeEmoji(typeName)}</div>`,
+            html: `<div style="background-color: ${getMarkerColor(category)}; width:24px; height:24px; border-radius:50%; text-align:center; line-height:24px; font-size:16px; color:white;">${getCategoryEmoji(category)}</div>`,
             iconSize: [24, 24],
             iconAnchor: [12, 24]
         });
     }
 
-    // Función para cargar incidencias del backend y mostrarlas en el mapa
+    // Función para cargar incidencias desde el backend y mostrarlas en el mapa
     function loadIncidencias() {
         fetch('http://localhost:8080/rest/api/v1/incidencia')
             .then(response => response.json())
             .then(incidencias => {
-                // Limpiar marcadores existentes (opcional, según tu lógica)
-                // Recorremos cada incidencia y agregamos un marcador
+                // Aquí se crean los marcadores para cada incidencia (se asume que el backend incluye "category", etc.)
                 incidencias.forEach(incidencia => {
-                    // Determinar el nombre del tipo
-                    let typeName = "";
-                    if (typeof incidencia.type === 'object' && incidencia.type.name) {
-                        typeName = incidencia.type.name;
-                    } else if (typeof incidencia.type === 'number' || typeof incidencia.type === 'string') {
-                        typeName = typeMapping[incidencia.type] || incidencia.type;
-                    } else {
-                        typeName = incidencia.type;
+                    const category = incidencia.category || (incidencia.type && incidencia.type.name) || "Desconocido";
+                    const marker = L.marker([incidencia.y, incidencia.x], {
+                        icon: createCustomMarkerIcon(category)
+                    }).addTo(map);
+                    let popupContent = `<b>${incidencia.description}</b><br>Categoría: ${category}`;
+                    if (typeof incidencia.priority_score !== 'undefined') {
+                        popupContent += `<br>Puntuación IA: ${incidencia.priority_score}`;
                     }
-
-                    const markerOptions = {
-                        icon: createCustomMarkerIcon(typeName)
-                    };
-
-                    // Asegúrate de usar el orden [lat, lng]
-                    const marker = L.marker([incidencia.y, incidencia.x], markerOptions).addTo(map);
-                    let popupContent = `<b>${incidencia.description}</b><br>Tipo: ${typeName}`;
                     marker.bindPopup(popupContent);
                 });
             })
             .catch(error => console.error("Error al cargar incidencias:", error));
     }
 
-    // Llamar a la función para cargar incidencias al iniciar
     loadIncidencias();
 
-    // Al hacer clic en el mapa, se muestra el formulario
+    // Al hacer clic en el mapa, se muestra el formulario para crear un reporte
     map.on('click', function(e) {
         const token = localStorage.getItem('jwtToken');
         if (!token || token.trim() === "") {
@@ -102,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
         popupForm.style.display = 'block';
     });
 
-    // Guardar marcador: se ejecuta al pulsar "Guardar"
+    // Al pulsar "Guardar" en el formulario
     document.getElementById('saveMarker').addEventListener('click', function() {
         const token = localStorage.getItem('jwtToken');
         if (!token || token.trim() === "") {
@@ -110,26 +104,14 @@ document.addEventListener("DOMContentLoaded", function() {
             popupForm.style.display = 'none';
             return;
         }
-
-        const type = document.getElementById('markerType').value; // Asegúrate de incluir "Sugerencia" en el select si corresponde
+        // Dentro del eventListener de "Guardar":
+        const selectedType = document.getElementById('markerType').value;  // "Incidencia" o "Sugerencia"
         const description = document.getElementById('markerText').value.trim();
         if (!description) {
             alert("Por favor, ingrese una descripción.");
             return;
         }
 
-        // Añadir marcador de feedback visual con icono personalizado
-        const customIcon = createCustomMarkerIcon(type);
-        const marker = L.marker(currentLatLng, { icon: customIcon }).addTo(map);
-        marker.bindPopup(`<b>${description}</b><br>Tipo: ${type}`);
-
-        // Determinar el endpoint según el tipo (si es "Sugerencia", se envía a sugerencias)
-        let endpoint = 'http://localhost:8080/rest/api/v1/incidencia';
-        if(type === "Sugerencia") {
-            endpoint = 'http://localhost:8080/rest/api/v1/sugerencia';
-        }
-
-        // Usar reverse-geocoding con Nominatim para obtener datos de dirección
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${currentLatLng.lat}&lon=${currentLatLng.lng}&format=json`)
             .then(response => response.json())
             .then(data => {
@@ -139,28 +121,105 @@ document.addEventListener("DOMContentLoaded", function() {
                     alert("No se pudo determinar el municipio desde las coordenadas.");
                     return;
                 }
-                // Extraer calle, número y código postal
                 let street = address.road || address.pedestrian || "Desconocido";
                 let houseNumber = address.house_number || "";
                 let postalCode = address.postcode || "";
                 let fullStreet = street;
-                if (houseNumber) {
-                    fullStreet += " " + houseNumber;
-                }
-                if (postalCode) {
-                    fullStreet += ", " + postalCode;
-                }
+                if (houseNumber) fullStreet += " " + houseNumber;
+                if (postalCode) fullStreet += ", " + postalCode;
 
-                // Realizar la petición al backend para persistir la incidencia o sugerencia
-                fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({
+                // Llamada a la API de clasificación (solo para "Incidencia")
+                if (selectedType === "Incidencia") {
+                    const classificationPayload = {
+                        municipi: municipalityName,
+                        incidencia: description
+                    };
+
+                    fetch('http://localhost:5001/clasificar', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        mode: 'cors',
+                        body: JSON.stringify(classificationPayload)
+                    })
+                        .then(response => response.text())
+                        .then(rawText => {
+                            console.log("Raw classification response:", rawText);
+                            let result;
+                            try {
+                                result = parseClassificationResponse(rawText);
+                            } catch (e) {
+                                console.error("Error al parsear la respuesta de clasificación:", e);
+                                alert("Error al interpretar la respuesta de la IA.");
+                                return;
+                            }
+                            console.log("Resultado de clasificación parseado:", result);
+                            if (result.is_spam === true) {
+                                alert("El reporte ha sido clasificado como spam. No se creará la incidencia.");
+                                popupForm.style.display = 'none';
+                                document.getElementById('markerText').value = '';
+                                currentLatLng = null;
+                                return;
+                            }
+                            const category = result.category || "Desconocido";
+                            const priority_score = result.priority_score || 0;
+                            if (category === "Desconocido") {
+                                alert("La IA no pudo determinar correctamente la categoría. Respuesta: " + rawText);
+                                // Puedes optar por cancelar o seguir con un valor por defecto.
+                            }
+                            // Endpoint para incidencias
+                            const endpoint = 'http://localhost:8080/rest/api/v1/incidencia';
+                            const incidentPayload = {
+                                description: description,
+                                emoji: getCategoryEmoji(category),
+                                likes: 0,
+                                municipality: { name: municipalityName },
+                                score_IA: priority_score,
+                                score_final: priority_score,
+                                x: currentLatLng.lng,
+                                y: currentLatLng.lat,
+                                state: { name: "Activo" },
+                                street: fullStreet,
+                                type: { name: category },
+                                dateInitial: new Date(),
+                                category: category,
+                                priority_score: priority_score
+                            };
+                            fetch(endpoint, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + token
+                                },
+                                body: JSON.stringify(incidentPayload)
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error("Error en la creación: " + response.statusText);
+                                    }
+                                    return response.text();
+                                })
+                                .then(data => {
+                                    console.log("Incidencia creada con ID:", data);
+                                    loadIncidencias();
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                    alert("Error al guardar la incidencia: " + error.message);
+                                });
+                            popupForm.style.display = 'none';
+                            document.getElementById('markerText').value = '';
+                            currentLatLng = null;
+                        })
+                        .catch(err => {
+                            console.error("Error al clasificar la incidencia:", err);
+                            alert("Error al clasificar la incidencia.");
+                        });
+                } else {
+                    // Rama para "Sugerencia" (sin llamar a la IA)
+                    const endpoint = 'http://localhost:8080/rest/api/v1/sugerencia';
+                    const incidentPayload = {
                         description: description,
-                        emoji: getTypeEmoji(type),
+                        emoji: getCategoryEmoji("Sugerencia"),
                         likes: 0,
                         municipality: { name: municipalityName },
                         score_IA: 0,
@@ -169,37 +228,46 @@ document.addEventListener("DOMContentLoaded", function() {
                         y: currentLatLng.lat,
                         state: { name: "Activo" },
                         street: fullStreet,
-                        type: { name: type },
-                        dateInitial: new Date()
+                        type: { name: "Sugerencia" },
+                        dateInitial: new Date(),
+                        category: "Sugerencia",
+                        priority_score: 0
+                    };
+                    fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify(incidentPayload)
                     })
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Error en la creación: " + response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        console.log("Creado con ID:", data);
-                        // Recargar los marcadores para mostrar la nueva incidencia/sugerencia
-                        loadIncidencias();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        alert("Error al guardar la incidencia: " + error.message);
-                    });
-
-                popupForm.style.display = 'none';
-                document.getElementById('markerText').value = '';
-                currentLatLng = null;
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Error en la creación: " + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            console.log("Sugerencia creada con ID:", data);
+                            loadIncidencias();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            alert("Error al guardar la sugerencia: " + error.message);
+                        });
+                    popupForm.style.display = 'none';
+                    document.getElementById('markerText').value = '';
+                    currentLatLng = null;
+                }
             })
             .catch(err => {
                 console.error("Error en reverse-geocoding:", err);
                 alert("Error al determinar la dirección.");
             });
+
     });
 
-    // Botón Cancelar: Oculta el formulario sin añadir marcador
+    // Botón Cancelar: cierra el formulario sin crear nada
     document.getElementById('cancelMarker').addEventListener('click', function() {
         popupForm.style.display = 'none';
         document.getElementById('markerText').value = '';

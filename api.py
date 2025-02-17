@@ -4,8 +4,10 @@ import re
 import requests
 import pandas as pd
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Importa flask-cors
 
 app = Flask(__name__)
+CORS(app)  # Esto habilita CORS para todas las rutas
 
 # ------------------------------
 # Funciones de Configuración y Limpieza
