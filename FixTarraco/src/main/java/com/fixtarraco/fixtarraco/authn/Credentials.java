@@ -58,8 +58,5 @@ public class Credentials implements Serializable {
         this.username = username;
     }
 
-    public String generateJwtToken() {
-        this.jwtToken = JWTUtil.generateToken(this.username);
-        return this.jwtToken;
-    }
+
 }

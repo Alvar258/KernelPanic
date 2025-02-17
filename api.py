@@ -85,7 +85,7 @@ Instrucciones:
    "is_spam": true, "category": "", "priority_score": 0.
 2. Si el reporte describe un problema real en la infraestructura, responde:
    "is_spam": false,
-   "category": "infraestructura",
+   asigna un "category" entre Infraestructura o Vial,
    y asigna un "priority_score" del 0 al 100 basándote en lo siguiente:
 
    **A. Gravedad del problema (0-40 puntos):**
@@ -168,4 +168,4 @@ def clasificar():
         return jsonify({"error": "No se pudo obtener una respuesta válida de la IA."}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5001)

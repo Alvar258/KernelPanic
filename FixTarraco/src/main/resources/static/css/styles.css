@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+header nav a {
+    color: #fff;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+}
+
+/* Mapa ocupa la mayor parte */
+#map {
+    height: calc(100vh - 60px);
+    flex: 1;
+}
+
+/* Leyenda */
+.legend {
+    width: 200px;
+    background: #f4f4f4;
+    padding: 10px;
+}
+.legend h3 {
+    margin-top: 0;
+}
+.legend ul {
+    list-style: none;
+    padding: 0;
+}
+.legend li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+.color-box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+.red { background: red; }
+.blue { background: blue; }
+.yellow { background: yellow; }
+
+/* Popup Form */
+#popupForm {
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: none;
+}
+#popupForm label {
+    font-weight: bold;
+    margin-top: 5px;
+    display: block;
+}
+#popupForm select,
+#popupForm textarea,
+#popupForm button {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}

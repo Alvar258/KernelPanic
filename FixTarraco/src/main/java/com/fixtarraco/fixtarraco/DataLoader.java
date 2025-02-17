@@ -28,6 +28,12 @@ public class DataLoader implements CommandLineRunner {
         Estado estado = new Estado();
         estado.setName("Activo");
         em.persist(estado);
+        Estado estado1 = new Estado();
+        estado1.setName("Procesando");
+        em.persist(estado1);
+        Estado estado2 = new Estado();
+        estado2.setName("Arreglado");
+        em.persist(estado2);
 
         // Crear los municipios
         Municipio municipio = new Municipio();
@@ -70,10 +76,16 @@ public class DataLoader implements CommandLineRunner {
         municipio13.setName("Vilallonga del Camp");
         em.persist(municipio13);
 
-        // Crear un tipo de incidencia
-        TiposIncidencia tipo = new TiposIncidencia();
-        tipo.setName("Infraestructura");
-        em.persist(tipo);
+        // Crear tipo de incidencia "Infraestructura"
+        TiposIncidencia tipoInfra = new TiposIncidencia();
+        tipoInfra.setName("Infraestructura");
+        em.persist(tipoInfra);
+
+        // Crear tipo de incidencia "Vial"
+        TiposIncidencia tipoVial = new TiposIncidencia();
+        tipoVial.setName("Vial");
+        em.persist(tipoVial);
+
 
         // Crear un usuario y sus credenciales
         Credentials cred = new Credentials();
@@ -99,7 +111,7 @@ public class DataLoader implements CommandLineRunner {
         incidencia.setY(200);
         incidencia.setState(estado);
         incidencia.setStreet("Calle Principal");
-        incidencia.setType(tipo);
+        incidencia.setType(tipoInfra);
         incidencia.setDateInitial(new Date());
         incidencia.setDateFinished(new Date());
         em.persist(incidencia);

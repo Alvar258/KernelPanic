@@ -1,5 +1,7 @@
 package com.fixtarraco.fixtarraco.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,6 +26,10 @@ import java.util.Objects;
 @Table(name = "INCIDENCIA", uniqueConstraints = @UniqueConstraint(columnNames = "description"))
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Incidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,10 +67,10 @@ public class Incidencia implements Serializable {
     private int score_final;
 
     @Column(nullable = false)
-    private int x;
+    private double x;
 
     @Column(nullable = false)
-    private int y;
+    private double y;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id", referencedColumnName = "id")
@@ -175,19 +181,19 @@ public class Incidencia implements Serializable {
         this.type = type;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 

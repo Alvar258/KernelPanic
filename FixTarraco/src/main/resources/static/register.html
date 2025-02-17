@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrarse - FixTarraco</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- Header -->
+<div id="headerContainer"></div>
+
+
+<div class="container">
+    <h2>Registrarse</h2>
+    <form id="registerForm">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+
+        <!-- Aquí podrías agregar más campos si se requiere, por ejemplo, nombre, email, etc. -->
+        <button type="submit">Registrarse</button>
+    </form>
+    <div id="registerMessage"></div>
+</div>
+<script>
+    // Cargar el header desde el fragmento externo
+    fetch('fragments/header.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('headerContainer').innerHTML = html;
+        })
+        .catch(err => console.error('Error al cargar header:', err));
+</script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Se construye el objeto usuario. Aquí se asume que para registrarse se requiere
+        // establecer 'cityHall' (por ejemplo, false) y se adjuntan las credenciales.
+        const usuario = {
+            cityHall: false,
+            credentials: {
+                username: username,
+                password: password
+            },
+            imageURL: ""
+        };
+
+        fetch('http://localhost:8080/rest/api/v1/usuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario)
+        })
+            .then(response => {
+                if(response.ok) return response.text();
+                throw new Error("Error al registrarse");
+            })
+            .then(userId => {
+                // Una vez registrado, redirige al login para que se pueda iniciar sesión
+                window.location.href = 'login.html';
+            })
+            .catch(error => {
+                document.getElementById('registerMessage').textContent = error.message;
+            });
+    });
+</script>
+</body>
+</html>

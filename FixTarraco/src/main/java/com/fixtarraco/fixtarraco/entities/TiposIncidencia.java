@@ -1,5 +1,8 @@
 package com.fixtarraco.fixtarraco.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,6 +27,12 @@ import java.util.List;
 @Table(name = "TIPOSINCIDENCIA")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
+@JsonIgnoreProperties({"incidencias", "sugerencias", "hibernateLazyInitializer", "handler"})
+
 public class TiposIncidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;

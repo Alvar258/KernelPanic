@@ -1,14 +1,21 @@
 package com.fixtarraco.fixtarraco.service;
 
 import com.fixtarraco.fixtarraco.authn.Credentials;
+import com.fixtarraco.fixtarraco.authn.CustomUserDetailsService;
+import com.fixtarraco.fixtarraco.authn.JWTUtil;
 import com.fixtarraco.fixtarraco.authn.Secured;
+import com.fixtarraco.fixtarraco.entities.JwtResponse;
+import com.fixtarraco.fixtarraco.entities.LoginRequest;
 import com.fixtarraco.fixtarraco.entities.Usuario;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,6 +28,15 @@ public class UsuarioFacadeREST {
 
     @PersistenceContext
     private EntityManager em;
+
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService userDetailsService;
+
+    public UsuarioFacadeREST(AuthenticationManager authenticationManager,
+                             CustomUserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsers() {
@@ -112,17 +128,15 @@ public class UsuarioFacadeREST {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Credentials credentials) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            TypedQuery<Credentials> query = em.createNamedQuery("Credentials.findUser", Credentials.class);
-            Credentials storedCredentials = query.setParameter("username", credentials.getUsername()).getSingleResult();
-            if (storedCredentials.getPassword().equals(credentials.getPassword())) {
-                String token = com.fixtarraco.fixtarraco.authn.JWTUtil.generateToken(credentials.getUsername());
-                return ResponseEntity.ok(token);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-            }
-        } catch (NoResultException e) {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String token = JWTUtil.generateToken(userDetails);
+            return ResponseEntity.ok(new JwtResponse(token));
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
     }

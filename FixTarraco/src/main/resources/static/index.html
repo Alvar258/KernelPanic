@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>FixTarraco</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+<!-- Header: se inyecta dinámicamente -->
+<div id="headerContainer"></div>
+
+<!-- Contenedor principal -->
+<div class="container">
+  <div id="map"></div>
+  <div class="legend">
+    <h3>Leyenda</h3>
+    <ul>
+      <li><span class="color-box red"></span> Incidencia</li>
+      <li><span class="color-box blue"></span> Sugerencia</li>
+      <li><span class="color-box yellow"></span> En Proceso</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Popup para añadir marcador -->
+<div id="popupForm">
+  <label for="markerType">Tipo:</label>
+  <select id="markerType">
+    <option value="Infraestructura">Infraestructura</option>
+    <option value="Vial">Vial</option>
+    <option value="Sugerencia">Sugerencia</option>
+  </select>
+  <label for="markerText">Descripción:</label>
+  <textarea id="markerText" rows="3"></textarea>
+  <button id="saveMarker">Guardar</button>
+  <button id="cancelMarker">Cancelar</button>
+</div>
+
+
+
+<!-- Script para construir el header dinámicamente -->
+<script>
+  (function(){
+    const token = localStorage.getItem('jwtToken');
+    let headerHTML = `<header>
+          <div class="logo"><h1>FixTarraco</h1></div>
+          <nav id="navLinks">`;
+    if(token && token.trim() !== ""){
+      headerHTML += `<a href="index.html">Inicio</a>
+                         <a href="#" id="logoutLink">Cerrar Sesión</a>`;
+    } else {
+      headerHTML += `<a href="index.html">Inicio</a>
+                         <a href="login.html">Iniciar Sesión</a>
+                         <a href="register.html">Registrarse</a>`;
+    }
+    headerHTML += `</nav></header>`;
+    document.getElementById('headerContainer').innerHTML = headerHTML;
+    if(token && token.trim() !== ""){
+      document.getElementById('logoutLink').addEventListener('click', function(e){
+        e.preventDefault();
+        localStorage.removeItem('jwtToken');
+        location.reload();
+      });
+    }
+  })();
+</script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>

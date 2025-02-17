@@ -1,5 +1,6 @@
 package com.fixtarraco.fixtarraco.service;
 
+import com.fixtarraco.fixtarraco.authn.Secured;
 import com.fixtarraco.fixtarraco.entities.Estado;
 import com.fixtarraco.fixtarraco.entities.Incidencia;
 import com.fixtarraco.fixtarraco.entities.Municipio;
@@ -7,6 +8,7 @@ import com.fixtarraco.fixtarraco.entities.TiposIncidencia;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,28 +65,44 @@ public class IncidenciaFacadeREST {
     }
 
     @PostMapping
-    // @Secured (reemplaza por la anotación de Spring Security que uses)
+    @Secured
+    @Transactional
     public ResponseEntity<?> createIncidencia(@RequestBody Incidencia incidencia, Principal principal) {
-        // Se asume que el usuario está autenticado (verifica con Spring Security)
-        // Validar estado, municipio y tipo mediante NamedQueries:
-        TypedQuery<Estado> query2 = em.createNamedQuery("Estado.findState", Estado.class);
-        Estado state = query2.setParameter("state", incidencia.getState().getName()).getSingleResult();
-        if (state == null) {
-            return ResponseEntity.badRequest().body("Introduce un estado valido");
+        // Validar y obtener el Estado mediante una consulta segura
+        Estado state;
+        try {
+            TypedQuery<Estado> query2 = em.createNamedQuery("Estado.findState", Estado.class);
+            state = query2.setParameter("state", incidencia.getState().getName()).getSingleResult();
+        } catch (jakarta.persistence.NoResultException ex) {
+            return ResponseEntity.badRequest().body("Estado no encontrado. Introduce un estado válido.");
         }
-        TypedQuery<Municipio> query3 = em.createNamedQuery("Municipio.findMunicipality", Municipio.class);
-        Municipio municipio = query3.setParameter("municipality", incidencia.getMunicipality().getName()).getSingleResult();
-        if (municipio == null) {
-            return ResponseEntity.badRequest().body("Introduce un municipio valido");
+
+        // Validar y obtener el Municipio
+        Municipio municipio;
+        try {
+            TypedQuery<Municipio> query3 = em.createNamedQuery("Municipio.findMunicipality", Municipio.class);
+            municipio = query3.setParameter("municipality", incidencia.getMunicipality().getName()).getSingleResult();
+        } catch (jakarta.persistence.NoResultException ex) {
+            return ResponseEntity.badRequest().body("Municipio no encontrado. Introduce un municipio válido.");
         }
-        TypedQuery<TiposIncidencia> query4 = em.createNamedQuery("TiposIncidencia.findType", TiposIncidencia.class);
-        TiposIncidencia type = query4.setParameter("type", incidencia.getType().getName()).getSingleResult();
-        if (type == null) {
-            return ResponseEntity.badRequest().body("Introduce un tipo valido");
+
+        // Validar y obtener el Tipo de incidencia
+        TiposIncidencia type;
+        try {
+            TypedQuery<TiposIncidencia> query4 = em.createNamedQuery("TiposIncidencia.findType", TiposIncidencia.class);
+            type = query4.setParameter("type", incidencia.getType().getName()).getSingleResult();
+        } catch (jakarta.persistence.NoResultException ex) {
+            return ResponseEntity.badRequest().body("Tipo de incidencia no encontrado. Introduce un tipo válido.");
         }
+
+        // Opcionalmente, puedes asignar los objetos obtenidos a la incidencia para asegurar la integridad:
+        incidencia.setState(state);
+        incidencia.setMunicipality(municipio);
+        incidencia.setType(type);
+
         try {
             em.persist(incidencia);
-            em.flush();
+            em.flush(); // Para que se genere el ID y se garantice la persistencia
             URI uri = URI.create("/rest/api/v1/incidencia/" + incidencia.getId());
             return ResponseEntity.created(uri).body(incidencia.getId().toString());
         } catch (Exception e) {
@@ -93,6 +111,7 @@ public class IncidenciaFacadeREST {
                     .body("Error al crear la incidencia: " + e.getMessage());
         }
     }
+
 
     @PutMapping("{id}")
     // @Secured

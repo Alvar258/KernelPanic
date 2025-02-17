@@ -72,11 +72,14 @@ public class SugerenciaFacadeREST {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Autenticación requerida");
         }
+        // Buscar el Municipio a partir del nombre enviado en la sugerencia
         TypedQuery<Municipio> query2 = em.createNamedQuery("Municipio.findMunicipality", Municipio.class);
         Municipio municipio = query2.setParameter("municipality", sugerencia.getMunicipality().getName()).getSingleResult();
         if (municipio == null) {
-            return ResponseEntity.badRequest().body("Introduce un municipio valido");
+            return ResponseEntity.badRequest().body("Introduce un municipio válido");
         }
+        // Asignar el Municipio obtenido a la sugerencia para que esté gestionado por JPA
+        sugerencia.setMunicipality(municipio);
         try {
             em.persist(sugerencia);
             em.flush();
@@ -88,6 +91,8 @@ public class SugerenciaFacadeREST {
                     .body("Error al crear la sugerencia: " + e.getMessage());
         }
     }
+
+
 
     @PutMapping("{id}")
     @Secured

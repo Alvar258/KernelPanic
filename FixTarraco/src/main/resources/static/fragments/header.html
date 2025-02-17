@@ -1,0 +1,31 @@
+<!-- fragments/header.html -->
+<header>
+  <div class="logo">
+    <h1>FixTarraco</h1>
+  </div>
+  <nav id="navLinks">
+    <!-- Se rellenará dinámicamente -->
+  </nav>
+</header>
+<script>
+  // Actualiza el header según si hay token en localStorage.
+  function updateHeader() {
+    const token = localStorage.getItem('jwtToken');
+    const nav = document.getElementById('navLinks');
+    if (token && token.trim() !== "") {
+      nav.innerHTML = '<a href="index.html">Inicio</a> ' +
+              '<a href="#" id="logoutLink">Cerrar Sesión</a>';
+      document.getElementById('logoutLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('jwtToken');
+        updateHeader();
+        window.location.href = 'index.html';
+      });
+    } else {
+      nav.innerHTML = '<a href="index.html">Inicio</a> ' +
+              '<a href="login.html">Iniciar Sesión</a> ' +
+              '<a href="register.html">Registrarse</a>';
+    }
+  }
+  updateHeader();
+</script>

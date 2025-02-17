@@ -1,36 +1,56 @@
 package com.fixtarraco.fixtarraco.config;
 
+import com.fixtarraco.fixtarraco.authn.CustomUserDetailsService;
 import com.fixtarraco.fixtarraco.authn.JwtAuthenticationFilter;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomUserDetailsService userDetailsService) throws Exception {
         http
-                // Desactivamos CSRF con la nueva forma (ya que la anterior está deprecada)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/h2-console/**").permitAll()
+                        // Permite las peticiones GET a incidencias sin autenticación
+                        .requestMatchers(HttpMethod.GET, "/rest/api/v1/incidencia/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/login.html", "/register.html",
+                                "/css/**", "/js/**", "/fragments/**", "/h2-console/**").permitAll()
                         .requestMatchers("/rest/api/v1/usuario/login", "/rest/api/v1/usuario").permitAll()
-                        // Si deseas que el endpoint /state sea público, también lo permites
-                        .requestMatchers("/rest/api/v1/state").permitAll()
                         .anyRequest().authenticated()
                 )
-                // Necesario para que la consola H2 se muestre en iframe
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-                .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(customAuthenticationEntryPoint())
+                )
+                .addFilterBefore(new JwtAuthenticationFilter(userDetailsService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public AuthenticationEntryPoint customAuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("No autorizado: token inválido o ausente.");
+        };
     }
 
     @Bean
