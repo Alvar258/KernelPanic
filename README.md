@@ -3,6 +3,8 @@
 
 **Plataforma de Reporte y Mejora Urbana para Tarragona**
 
+🏆 **Primer Premio en la [Hackatón Cloud Computing URV-TSystems 2025](https://cloudlab.urv.cat/catedracloud/2025/02/17/hackaton-cloud-computing-urv-tsystems-2025-1er-premio/)** 🥇
+
 Se trata de una aplicación web diseñada para que los ciudadanos puedan reportar incidencias en la vía pública y sugerir mejoras que contribuyan a la calidad de vida en Tarragona.
 
 ## 👥 Equipo
